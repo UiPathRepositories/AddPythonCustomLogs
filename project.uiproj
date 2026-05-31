@@ -1,0 +1,6 @@
+{
+  "Name": "AddPythonCustomLogs",
+  "ProjectType": "Process",
+  "Description": "AddPythonCustomLogs",
+  "MainFile": "Main.xaml"
+}

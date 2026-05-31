@@ -1,0 +1,372 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="MonitorNewLogLines" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="logFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="lineCursor" Type="InOutArgument(x:Int32)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>MonitorNewLogLines_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.Platform.Triggers</x:String>
+      <x:String>UiPath.Platform.Triggers.Scope</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Reusable single-scan workflow for log monitoring.&#xA;The caller owns timing and stop conditions; this workflow only reads the current file snapshot, logs lines after lineCursor, and returns the updated cursor." DisplayName="Monitor New Log Lines" sap:VirtualizedContainerService.HintSize="560,720" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="s:String[]" Name="logLines" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment DisplayName="Comment - Single Scan Log Reader" sap:VirtualizedContainerService.HintSize="540,120" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Purpose: copy newly appended Python JSON log records into the UiPath workflow log.&#xA;&#xA;Approach:&#xA;1. Main.xaml initializes lineCursor before starting the BAT file so historical lines are skipped.&#xA;2. Each invocation reads the full current text file into logLines.&#xA;3. If the file line count is less than lineCursor, the file was truncated or rotated, so the cursor is reset to 0.&#xA;4. The For Each activity parses each new JSON line, extracts loglevel and message, then logs the message at the requested level.&#xA;5. The cursor is advanced to logLines.Length and returned to the caller through the InOut argument." />
+    <If sap2010:Annotation.AnnotationText="Reads the file only when it exists. If it is temporarily missing, this scan exits without changing the cursor." Condition="[File.Exists(logFilePath)]" DisplayName="Read Existing Log File" sap:VirtualizedContainerService.HintSize="540,576" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence sap2010:Annotation.AnnotationText="Reads the current file snapshot, handles truncation, logs only lines after lineCursor, then advances lineCursor." DisplayName="Read And Log New Lines" sap:VirtualizedContainerService.HintSize="510,504" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign sap2010:Annotation.AnnotationText="Captures the current file contents as an array of lines for this scan." DisplayName="Read All Log Lines" sap:VirtualizedContainerService.HintSize="480,48" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="s:String[]">[logLines]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="s:String[]">[File.ReadAllLines(logFilePath)]</InArgument>
+            </Assign.Value>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Assign>
+          <If sap2010:Annotation.AnnotationText="Detects a shorter file than the previous cursor position. This usually means the log was truncated or rotated." Condition="[logLines.Length &lt; lineCursor]" DisplayName="Handle Truncated Log File" sap:VirtualizedContainerService.HintSize="480,264" sap2010:WorkflowViewState.IdRef="If_2">
+            <If.Then>
+              <Sequence DisplayName="Reset Cursor" sap:VirtualizedContainerService.HintSize="480,96" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign sap2010:Annotation.AnnotationText="Resets the cursor so the available lines in the new or truncated file can be processed from the start." DisplayName="Reset Line Cursor" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_2">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[lineCursor]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">[0]</InArgument>
+                  </Assign.Value>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Assign>
+              </Sequence>
+            </If.Then>
+          </If>
+          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Iterates only over file lines after lineCursor. Filtering by position preserves repeated identical log entries." DisplayName="For Each New Log Line" sap:VirtualizedContainerService.HintSize="480,168" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[logLines.Skip(lineCursor).ToArray()]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="x:String">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:String" Name="currentLine" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Log Line Body" sap:VirtualizedContainerService.HintSize="480,96" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Boolean" Default="False" Name="isValidJsonLog" />
+                    <Variable x:TypeArguments="njl:JObject" Name="jsonLogObject" />
+                    <Variable x:TypeArguments="x:String" Name="parsedLogLevel" />
+                    <Variable x:TypeArguments="x:String" Name="parsedLogMessage" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign DisplayName="Reset Parsed Log Message" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_4">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[parsedLogMessage]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[Nothing]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="Reset Parsed Log Level" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_5">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[parsedLogLevel]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[Nothing]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="Reset Valid JSON Flag" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_6">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Boolean">[isValidJsonLog]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Boolean">[False]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="Reset JSON Log Object" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_7">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="njl:JObject">[jsonLogObject]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="njl:JObject">[Nothing]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <TryCatch DisplayName="Parse JSON Log Record With Activities" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                    <TryCatch.Try>
+                      <Sequence DisplayName="Deserialize And Validate JSON Record">
+                        <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON Log Record" JsonObject="[jsonLogObject]" JsonSample="{x:Null}" JsonString="[currentLine]" Settings="{x:Null}" />
+                        <If Condition="[jsonLogObject IsNot Nothing AndAlso jsonLogObject(&quot;loglevel&quot;) IsNot Nothing AndAlso jsonLogObject(&quot;message&quot;) IsNot Nothing AndAlso jsonLogObject(&quot;loglevel&quot;).Type = JTokenType.String AndAlso jsonLogObject(&quot;message&quot;).Type = JTokenType.String]" DisplayName="Validate JSON Log Attributes">
+                          <If.Then>
+                            <Sequence DisplayName="Extract JSON Log Attributes">
+                              <Assign DisplayName="Set Parsed Log Message">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[parsedLogMessage]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[jsonLogObject("message").ToString()]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <Switch x:TypeArguments="x:String" DisplayName="Normalize Parsed Log Level" Expression="[jsonLogObject(&quot;loglevel&quot;).ToString().Trim().ToUpperInvariant()]">
+                                <Sequence x:Key="TRACE" DisplayName="Normalize Trace Level">
+                                  <Assign DisplayName="Set Trace Level">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[parsedLogLevel]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">["Trace"]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Sequence>
+                                <Sequence x:Key="INFO" DisplayName="Normalize Info Level">
+                                  <Assign DisplayName="Set Info Level">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[parsedLogLevel]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">["Info"]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Sequence>
+                                <Sequence x:Key="INFORMATION" DisplayName="Normalize Information Level">
+                                  <Assign DisplayName="Set Information Level">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[parsedLogLevel]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">["Info"]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Sequence>
+                                <Sequence x:Key="WARN" DisplayName="Normalize Warn Level">
+                                  <Assign DisplayName="Set Warn Level">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[parsedLogLevel]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">["Warn"]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Sequence>
+                                <Sequence x:Key="WARNING" DisplayName="Normalize Warning Level">
+                                  <Assign DisplayName="Set Warning Level">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[parsedLogLevel]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">["Warn"]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Sequence>
+                                <Sequence x:Key="ERROR" DisplayName="Normalize Error Level">
+                                  <Assign DisplayName="Set Error Level">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[parsedLogLevel]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">["Error"]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Sequence>
+                                <Sequence x:Key="FATAL" DisplayName="Normalize Fatal Level">
+                                  <Assign DisplayName="Set Fatal Level">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[parsedLogLevel]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">["Fatal"]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Sequence>
+                              </Switch>
+                              <Assign DisplayName="Set Valid JSON Log Flag">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:Boolean">[isValidJsonLog]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:Boolean">[Not String.IsNullOrEmpty(parsedLogLevel) AndAlso parsedLogMessage IsNot Nothing]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </Sequence>
+                          </If.Then>
+                        </If>
+                      </Sequence>
+                    </TryCatch.Try>
+                    <TryCatch.Catches>
+                      <Catch x:TypeArguments="s:Exception">
+                        <ActivityAction x:TypeArguments="s:Exception">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s:Exception" Name="jsonParseException" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Mark JSON Parse As Invalid">
+                            <Assign DisplayName="Set Invalid JSON Log Flag">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Boolean">[isValidJsonLog]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Boolean">[False]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </Sequence>
+                        </ActivityAction>
+                      </Catch>
+                    </TryCatch.Catches>
+                  </TryCatch>
+                  <If Condition="[isValidJsonLog]" DisplayName="Handle Parsed JSON Log Record">
+                    <If.Then>
+                      <Sequence DisplayName="Route Parsed Log Level">
+                        <Switch x:TypeArguments="x:String" DisplayName="Route Log Level" Expression="[parsedLogLevel]">
+                          <Switch.Default>
+                            <Sequence DisplayName="Log Unsupported Level Diagnostic">
+                              <ui:LogMessage DisplayName="Log Unsupported JSON Log Level" Level="Error" Message="[&quot;Invalid JSON log record found. Raw line: &quot; + currentLine]" />
+                            </Sequence>
+                          </Switch.Default>
+                          <Sequence x:Key="Trace" DisplayName="Log Trace JSON Record">
+                            <ui:LogMessage DisplayName="Add Trace Log Message" Level="Trace" Message="[parsedLogMessage]" />
+                          </Sequence>
+                          <Sequence x:Key="Info" DisplayName="Log Info JSON Record">
+                            <ui:LogMessage DisplayName="Add Info Log Message" Level="Info" Message="[parsedLogMessage]" />
+                          </Sequence>
+                          <Sequence x:Key="Warn" DisplayName="Log Warning JSON Record">
+                            <ui:LogMessage DisplayName="Add Warning Log Message" Level="Warn" Message="[parsedLogMessage]" />
+                          </Sequence>
+                          <Sequence x:Key="Error" DisplayName="Log Error JSON Record">
+                            <ui:LogMessage DisplayName="Add Error Log Message" Level="Error" Message="[parsedLogMessage]" />
+                          </Sequence>
+                          <Sequence x:Key="Fatal" DisplayName="Log Fatal JSON Record">
+                            <ui:LogMessage DisplayName="Add Fatal Log Message" Level="Fatal" Message="[parsedLogMessage]" />
+                          </Sequence>
+                        </Switch>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence DisplayName="Log Invalid JSON Record">
+                        <ui:LogMessage DisplayName="Log Invalid JSON Log Record" Level="Error" Message="[&quot;Invalid JSON log record found. Raw line: &quot; + currentLine]" />
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+          </ui:ForEach>
+          <Assign sap2010:Annotation.AnnotationText="Marks every line in the current snapshot as processed. The caller receives the updated cursor." DisplayName="Move Line Cursor" sap:VirtualizedContainerService.HintSize="480,48" sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[lineCursor]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">[logLines.Length]</InArgument>
+            </Assign.Value>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Assign>
+        </Sequence>
+      </If.Then>
+    </If>
+  </Sequence>
+</Activity>
