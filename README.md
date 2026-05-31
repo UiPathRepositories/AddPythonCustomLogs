@@ -1,4 +1,4 @@
-# Add Python Custom Logs
+﻿# Add Python Custom Logs
 
 UiPath RPA sample project that brings logs from an external Python script back into the UiPath job log.
 
@@ -246,7 +246,7 @@ Keep `runtime_log.txt` only if you want to provide a sample output file.
 This repository includes a publish-ready article draft:
 
 ```text
-hashnode-uipath-external-script-observability.md
+https://jdoshi2091.hashnode.dev/making-external-script-execution-observable-in-uipath
 ```
 
 The article explains the customer problem, the observability gap, and the file-based log bridge pattern used in this project.
