@@ -7,7 +7,7 @@ from pathlib import Path
 LOG_FILE_NAME = "runtime_log.txt"
 LOG_INTERVAL_SECONDS = 5
 RUN_DURATION_SECONDS = 12 * 60 * 60
-LOG_LEVEL = "Error"
+LOG_LEVEL = "Warn"
 MESSAGE = "Script is running"
 
 
